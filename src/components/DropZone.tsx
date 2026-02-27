@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { formatBytes } from "@/lib/utils";
 
 interface DropZoneProps {
@@ -25,6 +26,7 @@ export default function DropZone({
   accept = "video/*",
 }: DropZoneProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const t = useTranslations("dropZone");
 
   return (
     <div
@@ -41,7 +43,7 @@ export default function DropZone({
       onClick={() => inputRef.current?.click()}
       role="button"
       tabIndex={0}
-      aria-label="Drop video file here or click to select"
+      aria-label={t("ariaLabel")}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           inputRef.current?.click();
@@ -87,17 +89,15 @@ export default function DropZone({
               {videoFile.name}
             </p>
             <p className="text-zinc-500 text-sm mt-1">
-              {formatBytes(inputSize)} — click to change
+              {formatBytes(inputSize)} — {t("clickToChange")}
             </p>
           </div>
         ) : (
           <div>
             <p className="text-zinc-200 font-semibold text-lg">
-              {isDragOver ? "Drop it!" : "Drop your video here"}
+              {isDragOver ? t("dropIt") : t("dropHere")}
             </p>
-            <p className="text-zinc-500 text-sm mt-1">
-              or click to browse · MP4, WebM, MOV and more
-            </p>
+            <p className="text-zinc-500 text-sm mt-1">{t("browse")}</p>
           </div>
         )}
       </div>

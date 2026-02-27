@@ -1,8 +1,8 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 interface ToolCardProps {
   name: string;
-  href: string;
+  href: "/compress-video" | "/convert-video" | "/resize-video" | "/mute-video" | "/rotate-video";
   description: string;
   shortDescription: string;
 }

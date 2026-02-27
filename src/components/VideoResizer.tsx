@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import DropZone from "./DropZone";
 import ProgressBar from "./ProgressBar";
 import ResultCard from "./ResultCard";
@@ -13,14 +14,24 @@ import { useFFmpeg } from "@/hooks/useFFmpeg";
 import { useVideoFile } from "@/hooks/useVideoFile";
 import { getDownloadFilename } from "@/lib/utils";
 
-const PRESETS = [
-  { value: "3840", label: "4K" },
-  { value: "1920", label: "1080p" },
-  { value: "1280", label: "720p" },
-  { value: "854", label: "480p" },
-  { value: "640", label: "360p" },
-  { value: "custom", label: "Custom" },
-];
+interface VideoResizerProps {
+  translations: {
+    resolutionLabel: string;
+    custom: string;
+    customWidthLabel: string;
+    customPlaceholder: string;
+    customError: string;
+    customHint: string;
+    actionButton: string;
+    loadingText: string;
+    progressLabel: string;
+    progressHint: string;
+    outputLabel: string;
+    successMessage: string;
+    downloadLabel: string;
+    resetButton: string;
+  };
+}
 
 function buildResizeArgs(
   width: string,
@@ -39,12 +50,22 @@ function buildResizeArgs(
   ];
 }
 
-export default function VideoResizer() {
+export default function VideoResizer({ translations: t }: VideoResizerProps) {
+  const te = useTranslations("error");
   const [preset, setPreset] = useState("1920");
   const [customWidth, setCustomWidth] = useState("");
   const [customError, setCustomError] = useState<string | null>(null);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [outputSize, setOutputSize] = useState(0);
+
+  const PRESETS = [
+    { value: "3840", label: "4K" },
+    { value: "1920", label: "1080p" },
+    { value: "1280", label: "720p" },
+    { value: "854", label: "480p" },
+    { value: "640", label: "360p" },
+    { value: "custom", label: t.custom },
+  ];
 
   const {
     videoFile, inputSize, isDragOver,
@@ -57,10 +78,9 @@ export default function VideoResizer() {
     if (preset !== "custom") return preset;
     const w = parseInt(customWidth, 10);
     if (!w || w < 128 || w > 7680) {
-      setCustomError("Enter a width between 128 and 7680 pixels");
+      setCustomError(t.customError);
       return null;
     }
-    // Ensure even number (required by libx264)
     return String(w % 2 === 0 ? w : w + 1);
   };
 
@@ -110,7 +130,7 @@ export default function VideoResizer() {
       {videoFile !== null && status !== "processing" && status !== "done" ? (
         <div className="mt-6 space-y-5">
           <OptionSelector
-            label="Resolution"
+            label={t.resolutionLabel}
             options={PRESETS}
             selected={preset}
             onChange={(v) => {
@@ -122,7 +142,7 @@ export default function VideoResizer() {
           {preset === "custom" ? (
             <div>
               <label className="block text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">
-                Custom Width (px)
+                {t.customWidthLabel}
               </label>
               <input
                 type="number"
@@ -133,15 +153,13 @@ export default function VideoResizer() {
                   setCustomWidth(e.target.value);
                   setCustomError(null);
                 }}
-                placeholder="e.g. 1080"
+                placeholder={t.customPlaceholder}
                 className="w-full bg-zinc-800 text-zinc-100 border border-zinc-700 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-violet-500 transition-colors"
               />
               {customError ? (
                 <p className="text-red-400 text-xs mt-1">{customError}</p>
               ) : (
-                <p className="text-zinc-600 text-xs mt-1">
-                  Height is calculated automatically to maintain aspect ratio
-                </p>
+                <p className="text-zinc-600 text-xs mt-1">{t.customHint}</p>
               )}
             </div>
           ) : null}
@@ -149,9 +167,9 @@ export default function VideoResizer() {
             onClick={handleRun}
             disabled={isDisabled}
             loading={status === "loading-ffmpeg"}
-            loadingText="Loading FFmpeg…"
+            loadingText={t.loadingText}
           >
-            Resize Video
+            {t.actionButton}
           </ActionButton>
         </div>
       ) : null}
@@ -159,8 +177,8 @@ export default function VideoResizer() {
       {status === "processing" ? (
         <ProgressBar
           progress={progress}
-          label="Resizing…"
-          hint="Re-encoding video with new resolution"
+          label={t.progressLabel}
+          hint={t.progressHint}
         />
       ) : null}
 
@@ -169,8 +187,8 @@ export default function VideoResizer() {
           <ResultCard
             inputSize={inputSize}
             outputSize={outputSize}
-            outputLabel="Resized"
-            successMessage="Resize complete!"
+            outputLabel={t.outputLabel}
+            successMessage={t.successMessage}
           />
           <DownloadButton
             url={outputUrl}
@@ -179,15 +197,15 @@ export default function VideoResizer() {
               `resized_${displayWidth}`,
               "mp4"
             )}
-            label="Download MP4"
+            label={t.downloadLabel}
           />
-          <ResetButton onClick={handleReset}>Resize another video</ResetButton>
+          <ResetButton onClick={handleReset}>{t.resetButton}</ResetButton>
         </div>
       ) : null}
 
       {status === "error" ? (
         <ErrorDisplay
-          message={errorMessage ?? "An unexpected error occurred."}
+          message={errorMessage ?? te("unexpected")}
           onRetry={handleReset}
         />
       ) : null}

@@ -1,4 +1,8 @@
+import { useTranslations } from "next-intl";
+
 export default function PrivacyBadge() {
+  const t = useTranslations("privacy");
+
   return (
     <div className="flex items-center justify-center gap-2 mb-6">
       <svg
@@ -16,7 +20,7 @@ export default function PrivacyBadge() {
         />
       </svg>
       <span className="text-emerald-400 text-sm font-medium">
-        Your video never leaves your device — all processing is done locally
+        {t("badge")}
       </span>
     </div>
   );

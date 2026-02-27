@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import DropZone from "./DropZone";
 import ProgressBar from "./ProgressBar";
 import ResultCard from "./ResultCard";
@@ -15,22 +16,30 @@ import { getDownloadFilename } from "@/lib/utils";
 
 type Rotation = "90cw" | "90ccw" | "180";
 
-const rotationOptions = [
-  { value: "90cw", label: "90° CW" },
-  { value: "90ccw", label: "90° CCW" },
-  { value: "180", label: "180°" },
-];
+interface VideoRotatorProps {
+  translations: {
+    rotationLabel: string;
+    "90cw": string;
+    "90ccw": string;
+    "180": string;
+    hint90cw: string;
+    hint90ccw: string;
+    hint180: string;
+    actionButton: string;
+    loadingText: string;
+    progressLabel: string;
+    progressHint: string;
+    outputLabel: string;
+    successMessage: string;
+    downloadLabel: string;
+    resetButton: string;
+  };
+}
 
 const filterMap: Record<Rotation, string> = {
   "90cw": "transpose=1",
   "90ccw": "transpose=2",
   "180": "transpose=1,transpose=1",
-};
-
-const rotationHints: Record<Rotation, string> = {
-  "90cw": "Rotate 90° clockwise",
-  "90ccw": "Rotate 90° counter-clockwise",
-  "180": "Flip upside down",
 };
 
 function buildRotateArgs(
@@ -50,10 +59,23 @@ function buildRotateArgs(
   ];
 }
 
-export default function VideoRotator() {
+export default function VideoRotator({ translations: t }: VideoRotatorProps) {
+  const te = useTranslations("error");
   const [rotation, setRotation] = useState<Rotation>("90cw");
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [outputSize, setOutputSize] = useState(0);
+
+  const rotationOptions = [
+    { value: "90cw", label: t["90cw"] },
+    { value: "90ccw", label: t["90ccw"] },
+    { value: "180", label: t["180"] },
+  ];
+
+  const rotationHints: Record<Rotation, string> = {
+    "90cw": t.hint90cw,
+    "90ccw": t.hint90ccw,
+    "180": t.hint180,
+  };
 
   const {
     videoFile, inputSize, isDragOver,
@@ -103,7 +125,7 @@ export default function VideoRotator() {
       {videoFile !== null && status !== "processing" && status !== "done" ? (
         <div className="mt-6 space-y-5">
           <OptionSelector
-            label="Rotation"
+            label={t.rotationLabel}
             options={rotationOptions}
             selected={rotation}
             onChange={(v) => setRotation(v as Rotation)}
@@ -114,9 +136,9 @@ export default function VideoRotator() {
             onClick={handleRun}
             disabled={isDisabled}
             loading={status === "loading-ffmpeg"}
-            loadingText="Loading FFmpeg…"
+            loadingText={t.loadingText}
           >
-            Rotate Video
+            {t.actionButton}
           </ActionButton>
         </div>
       ) : null}
@@ -124,8 +146,8 @@ export default function VideoRotator() {
       {status === "processing" ? (
         <ProgressBar
           progress={progress}
-          label="Rotating…"
-          hint="Re-encoding video with new orientation"
+          label={t.progressLabel}
+          hint={t.progressHint}
         />
       ) : null}
 
@@ -134,21 +156,21 @@ export default function VideoRotator() {
           <ResultCard
             inputSize={inputSize}
             outputSize={outputSize}
-            outputLabel="Rotated"
-            successMessage="Rotation complete!"
+            outputLabel={t.outputLabel}
+            successMessage={t.successMessage}
           />
           <DownloadButton
             url={outputUrl}
             filename={getDownloadFilename(videoFile?.name, "rotated", "mp4")}
-            label="Download MP4"
+            label={t.downloadLabel}
           />
-          <ResetButton onClick={handleReset}>Rotate another video</ResetButton>
+          <ResetButton onClick={handleReset}>{t.resetButton}</ResetButton>
         </div>
       ) : null}
 
       {status === "error" ? (
         <ErrorDisplay
-          message={errorMessage ?? "An unexpected error occurred."}
+          message={errorMessage ?? te("unexpected")}
           onRetry={handleReset}
         />
       ) : null}

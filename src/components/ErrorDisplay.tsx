@@ -1,9 +1,15 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 interface ErrorDisplayProps {
   message: string;
   onRetry: () => void;
 }
 
 export default function ErrorDisplay({ message, onRetry }: ErrorDisplayProps) {
+  const t = useTranslations("error");
+
   return (
     <div className="mt-4 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
       <div className="flex items-start gap-3">
@@ -27,7 +33,7 @@ export default function ErrorDisplay({ message, onRetry }: ErrorDisplayProps) {
             onClick={onRetry}
             className="mt-2 text-red-400 hover:text-red-300 text-sm underline transition-colors"
           >
-            Try again
+            {t("tryAgain")}
           </button>
         </div>
       </div>

@@ -1,0 +1,218 @@
+{
+  "metadata": {
+    "home": {
+      "title": "ShrinkClip — Free Online Video Tools",
+      "description": "Free browser-based video tools. Compress, convert, resize, mute, and rotate videos online. No upload needed — 100% private processing.",
+      "keywords": "video tools online, compress video, convert video, resize video, free video editor, browser video tools"
+    },
+    "compress": {
+      "title": "Compress Video Online Free",
+      "description": "Reduce video file size without losing quality. Compress MP4 and WebM videos in your browser. No upload required — 100% private.",
+      "keywords": "video compressor, compress video online, reduce video size, free video compressor, compress mp4, compress webm",
+      "ogTitle": "Compress Video Online Free | ShrinkClip",
+      "ogDescription": "Reduce video file size without losing quality. 100% browser-based, no upload required.",
+      "twitterDescription": "Reduce video file size without losing quality."
+    },
+    "convert": {
+      "title": "Convert Video Online Free — MP4, WebM",
+      "description": "Convert videos between MP4 and WebM formats for free. Browser-based video converter — no upload required, 100% private.",
+      "keywords": "video converter, convert video online, mp4 to webm, webm to mp4, free video converter, convert mp4",
+      "ogTitle": "Convert Video Online Free — MP4, WebM | ShrinkClip",
+      "ogDescription": "Convert videos between MP4 and WebM formats. Browser-based, no upload required.",
+      "twitterDescription": "Convert MP4 to WebM and WebM to MP4. No upload required."
+    },
+    "resize": {
+      "title": "Resize Video Online Free — Change Resolution",
+      "description": "Resize videos to any resolution. Scale down 4K to 1080p, 720p, or 480p. Free browser-based video resizer — no upload needed.",
+      "keywords": "resize video, change video resolution, downscale video, video resizer online, reduce video resolution, 4k to 1080p, 1080p to 720p",
+      "ogTitle": "Resize Video Online Free | ShrinkClip",
+      "ogDescription": "Resize videos to 1080p, 720p, 480p or custom resolution. No upload required.",
+      "twitterDescription": "Scale down 4K to 1080p, 720p, 480p or any custom resolution."
+    },
+    "mute": {
+      "title": "Remove Audio from Video Online Free",
+      "description": "Strip audio from any video file instantly. Mute videos in your browser — no upload needed, 100% private and free.",
+      "keywords": "remove audio from video, mute video, strip audio, video without sound, remove sound from video, mute video online",
+      "ogTitle": "Remove Audio from Video Online Free | ShrinkClip",
+      "ogDescription": "Strip audio from any video file instantly. No upload required.",
+      "twitterDescription": "Mute any video instantly in your browser. No upload needed."
+    },
+    "rotate": {
+      "title": "Rotate Video Online Free — 90° or 180°",
+      "description": "Rotate videos 90° clockwise, counterclockwise, or 180°. Free browser-based video rotator — no upload needed, works instantly.",
+      "keywords": "rotate video, rotate video online, flip video, rotate video 90 degrees, video rotator, rotate mp4 online",
+      "ogTitle": "Rotate Video Online Free | ShrinkClip",
+      "ogDescription": "Rotate videos 90° clockwise, counterclockwise, or 180°. No upload required.",
+      "twitterDescription": "Rotate any video 90° or 180° in your browser. No upload needed."
+    }
+  },
+  "nav": {
+    "home": "Home"
+  },
+  "hero": {
+    "title": "ShrinkClip",
+    "subtitle": "Free online video tools",
+    "description": "Compress, convert, resize, mute, and rotate videos directly in your browser. No uploads, no accounts, no limits."
+  },
+  "privacy": {
+    "badge": "Your video never leaves your device — all processing is done locally"
+  },
+  "tools": {
+    "compress": {
+      "name": "Compress Video",
+      "href": "/compress-video",
+      "description": "Reduce video file size without losing quality",
+      "shortDescription": "Shrink files up to 90%"
+    },
+    "convert": {
+      "name": "Convert Video",
+      "href": "/convert-video",
+      "description": "Convert between MP4 and WebM formats",
+      "shortDescription": "MP4 ↔ WebM"
+    },
+    "resize": {
+      "name": "Resize Video",
+      "href": "/resize-video",
+      "description": "Change video resolution to 1080p, 720p, or custom",
+      "shortDescription": "4K → 1080p → 720p → 480p"
+    },
+    "mute": {
+      "name": "Mute Video",
+      "href": "/mute-video",
+      "description": "Remove the audio track from any video file",
+      "shortDescription": "Instant audio removal"
+    },
+    "rotate": {
+      "name": "Rotate Video",
+      "href": "/rotate-video",
+      "description": "Rotate videos 90° clockwise, counterclockwise, or 180°",
+      "shortDescription": "90° · 180° · 270°"
+    }
+  },
+  "toolPages": {
+    "compress": {
+      "title": "Compress Video Online",
+      "description": "Reduce video file size without losing quality",
+      "jsonLdName": "ShrinkClip Video Compressor",
+      "jsonLdDescription": "Free online video compressor. Reduce file size without losing quality, directly in your browser."
+    },
+    "convert": {
+      "title": "Convert Video Online",
+      "description": "Convert between MP4 and WebM formats instantly",
+      "jsonLdName": "ShrinkClip Video Converter",
+      "jsonLdDescription": "Free online video format converter. Convert between MP4 and WebM directly in your browser."
+    },
+    "resize": {
+      "title": "Resize Video Online",
+      "description": "Change video resolution to 1080p, 720p, 480p or custom",
+      "jsonLdName": "ShrinkClip Video Resizer",
+      "jsonLdDescription": "Free online video resizer. Change video resolution to 1080p, 720p, 480p, or any custom size — directly in your browser."
+    },
+    "mute": {
+      "title": "Remove Audio from Video",
+      "description": "Strip the audio track from any video instantly",
+      "jsonLdName": "ShrinkClip Video Muter",
+      "jsonLdDescription": "Free online tool to remove audio from video files. Works directly in your browser with no upload required."
+    },
+    "rotate": {
+      "title": "Rotate Video Online",
+      "description": "Rotate videos 90° clockwise, counterclockwise, or 180°",
+      "jsonLdName": "ShrinkClip Video Rotator",
+      "jsonLdDescription": "Free online video rotator. Rotate videos 90° clockwise, counterclockwise, or 180° directly in your browser."
+    }
+  },
+  "dropZone": {
+    "dropIt": "Drop it!",
+    "dropHere": "Drop your video here",
+    "browse": "or click to browse · MP4, WebM, MOV and more",
+    "clickToChange": "click to change",
+    "ariaLabel": "Drop video file here or click to select"
+  },
+  "compressor": {
+    "qualityLabel": "Quality",
+    "qualityLow": "Low",
+    "qualityMedium": "Medium",
+    "qualityHigh": "High",
+    "qualityHintLow": "Smallest file · 640p",
+    "qualityHintMedium": "Balanced · 1280p",
+    "qualityHintHigh": "Best quality · original resolution",
+    "formatLabel": "Output Format",
+    "webmHint": "WebM (VP9) encoding is slower — may take several minutes",
+    "actionButton": "Compress Video",
+    "loadingText": "Loading FFmpeg…",
+    "progressLabel": "Compressing…",
+    "progressHintWebm": "VP9 encoding is thorough — this may take a few minutes",
+    "progressHintDefault": "Large files may take a minute or two",
+    "outputLabel": "Compressed",
+    "successMessage": "Compression complete!",
+    "downloadLabel": "Download {format}",
+    "resetButton": "Compress another video"
+  },
+  "converter": {
+    "formatLabel": "Output Format",
+    "webmHint": "WebM (VP9) encoding may take several minutes",
+    "actionButton": "Convert Video",
+    "loadingText": "Loading FFmpeg…",
+    "progressLabel": "Converting…",
+    "progressHintWebm": "VP9 encoding is thorough — this may take a few minutes",
+    "outputLabel": "Converted",
+    "successMessage": "Conversion complete!",
+    "downloadLabel": "Download {format}",
+    "resetButton": "Convert another video"
+  },
+  "resizer": {
+    "resolutionLabel": "Resolution",
+    "custom": "Custom",
+    "customWidthLabel": "Custom Width (px)",
+    "customPlaceholder": "e.g. 1080",
+    "customError": "Enter a width between 128 and 7680 pixels",
+    "customHint": "Height is calculated automatically to maintain aspect ratio",
+    "actionButton": "Resize Video",
+    "loadingText": "Loading FFmpeg…",
+    "progressLabel": "Resizing…",
+    "progressHint": "Re-encoding video with new resolution",
+    "outputLabel": "Resized",
+    "successMessage": "Resize complete!",
+    "downloadLabel": "Download MP4",
+    "resetButton": "Resize another video"
+  },
+  "muter": {
+    "info": "The audio track will be completely removed. Video quality stays the same — this operation is nearly instant since video is not re-encoded.",
+    "actionButton": "Remove Audio",
+    "loadingText": "Loading FFmpeg…",
+    "progressLabel": "Removing audio…",
+    "progressHint": "This is usually very fast",
+    "outputLabel": "Muted",
+    "successMessage": "Audio removed!",
+    "downloadLabel": "Download {format}",
+    "resetButton": "Mute another video"
+  },
+  "rotator": {
+    "rotationLabel": "Rotation",
+    "90cw": "90° CW",
+    "90ccw": "90° CCW",
+    "180": "180°",
+    "hint90cw": "Rotate 90° clockwise",
+    "hint90ccw": "Rotate 90° counter-clockwise",
+    "hint180": "Flip upside down",
+    "actionButton": "Rotate Video",
+    "loadingText": "Loading FFmpeg…",
+    "progressLabel": "Rotating…",
+    "progressHint": "Re-encoding video with new orientation",
+    "outputLabel": "Rotated",
+    "successMessage": "Rotation complete!",
+    "downloadLabel": "Download MP4",
+    "resetButton": "Rotate another video"
+  },
+  "result": {
+    "original": "Original",
+    "smaller": "{percent}% smaller"
+  },
+  "error": {
+    "unexpected": "An unexpected error occurred.",
+    "tryAgain": "Try again"
+  },
+  "footer": {
+    "poweredBy": "Powered by FFmpeg.wasm · 100% browser-based"
+  }
+}

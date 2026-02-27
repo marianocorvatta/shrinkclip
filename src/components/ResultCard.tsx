@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { formatBytes } from "@/lib/utils";
 
 interface ResultCardProps {
@@ -13,6 +16,7 @@ export default function ResultCard({
   outputLabel = "Output",
   successMessage = "Done!",
 }: ResultCardProps) {
+  const t = useTranslations("result");
   const savings =
     inputSize > 0 && outputSize > 0
       ? Math.round((1 - outputSize / inputSize) * 100)
@@ -28,7 +32,7 @@ export default function ResultCard({
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-zinc-800 rounded-xl p-4 text-center">
           <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold mb-2">
-            Original
+            {t("original")}
           </p>
           <p className="text-zinc-100 text-2xl font-bold">
             {formatBytes(inputSize)}
@@ -43,7 +47,7 @@ export default function ResultCard({
           </p>
           {savings > 0 ? (
             <p className="text-emerald-400 text-xs font-semibold mt-1">
-              {savings}% smaller
+              {t("smaller", { percent: savings })}
             </p>
           ) : null}
         </div>

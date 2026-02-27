@@ -1,9 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Header() {
   return (
     <div className="text-center mb-8">
+      <div className="flex justify-end mb-2">
+        <LanguageSwitcher />
+      </div>
       <Link href="/" className="inline-block group">
         <Image
           src="/logo-w.png"
