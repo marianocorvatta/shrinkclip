@@ -13,71 +13,45 @@ import { useFFmpeg } from "@/hooks/useFFmpeg";
 import { useVideoFile } from "@/hooks/useVideoFile";
 import { getDownloadFilename } from "@/lib/utils";
 
-type Quality = "low" | "medium" | "high";
-type Format = "mp4" | "webm";
+type Rotation = "90cw" | "90ccw" | "180";
 
-function buildCompressArgs(
-  quality: Quality,
-  format: Format,
+const rotationOptions = [
+  { value: "90cw", label: "90° CW" },
+  { value: "90ccw", label: "90° CCW" },
+  { value: "180", label: "180°" },
+];
+
+const filterMap: Record<Rotation, string> = {
+  "90cw": "transpose=1",
+  "90ccw": "transpose=2",
+  "180": "transpose=1,transpose=1",
+};
+
+const rotationHints: Record<Rotation, string> = {
+  "90cw": "Rotate 90° clockwise",
+  "90ccw": "Rotate 90° counter-clockwise",
+  "180": "Flip upside down",
+};
+
+function buildRotateArgs(
+  rotation: Rotation,
   inputName: string,
   outputName: string
 ): string[] {
-  const crfs: Record<Quality, string> = { low: "35", medium: "28", high: "23" };
-  const scales: Record<Quality, string[]> = {
-    low: ["-vf", "scale=640:-2"],
-    medium: ["-vf", "scale=1280:-2"],
-    high: [],
-  };
-  const bitrates: Record<Quality, string> = {
-    low: "64k",
-    medium: "128k",
-    high: "192k",
-  };
-
-  if (format === "mp4") {
-    return [
-      "-i", inputName,
-      "-vcodec", "libx264",
-      "-crf", crfs[quality],
-      "-preset", "fast",
-      ...scales[quality],
-      "-acodec", "aac",
-      "-b:a", bitrates[quality],
-      outputName,
-    ];
-  }
   return [
     "-i", inputName,
-    "-vcodec", "libvpx-vp9",
-    "-crf", crfs[quality],
-    "-b:v", "0",
-    ...scales[quality],
-    "-acodec", "libopus",
-    "-b:a", bitrates[quality],
+    "-vf", filterMap[rotation],
+    "-vcodec", "libx264",
+    "-crf", "23",
+    "-preset", "fast",
+    "-acodec", "aac",
+    "-b:a", "192k",
     outputName,
   ];
 }
 
-const qualityOptions = [
-  { value: "low", label: "Low" },
-  { value: "medium", label: "Medium" },
-  { value: "high", label: "High" },
-];
-
-const formatOptions = [
-  { value: "mp4", label: "MP4" },
-  { value: "webm", label: "WebM" },
-];
-
-const qualityHints: Record<Quality, string> = {
-  low: "Smallest file · 640p",
-  medium: "Balanced · 1280p",
-  high: "Best quality · original resolution",
-};
-
-export default function VideoCompressor() {
-  const [quality, setQuality] = useState<Quality>("medium");
-  const [format, setFormat] = useState<Format>("mp4");
+export default function VideoRotator() {
+  const [rotation, setRotation] = useState<Rotation>("90cw");
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [outputSize, setOutputSize] = useState(0);
 
@@ -92,8 +66,8 @@ export default function VideoCompressor() {
     if (!videoFile) return;
     const result = await loadAndExecute(
       videoFile,
-      (i, o) => buildCompressArgs(quality, format, i, o),
-      format
+      (i, o) => buildRotateArgs(rotation, i, o),
+      "mp4"
     );
     if (result) {
       setOutputUrl(result.url);
@@ -129,24 +103,12 @@ export default function VideoCompressor() {
       {videoFile !== null && status !== "processing" && status !== "done" ? (
         <div className="mt-6 space-y-5">
           <OptionSelector
-            label="Quality"
-            options={qualityOptions}
-            selected={quality}
-            onChange={(v) => setQuality(v as Quality)}
-            hint={qualityHints[quality]}
+            label="Rotation"
+            options={rotationOptions}
+            selected={rotation}
+            onChange={(v) => setRotation(v as Rotation)}
+            hint={rotationHints[rotation]}
             columns={3}
-          />
-          <OptionSelector
-            label="Output Format"
-            options={formatOptions}
-            selected={format}
-            onChange={(v) => setFormat(v as Format)}
-            hint={
-              format === "webm"
-                ? "WebM (VP9) encoding is slower — may take several minutes"
-                : null
-            }
-            columns={2}
           />
           <ActionButton
             onClick={handleRun}
@@ -154,7 +116,7 @@ export default function VideoCompressor() {
             loading={status === "loading-ffmpeg"}
             loadingText="Loading FFmpeg…"
           >
-            Compress Video
+            Rotate Video
           </ActionButton>
         </div>
       ) : null}
@@ -162,12 +124,8 @@ export default function VideoCompressor() {
       {status === "processing" ? (
         <ProgressBar
           progress={progress}
-          label="Compressing…"
-          hint={
-            format === "webm"
-              ? "VP9 encoding is thorough — this may take a few minutes"
-              : "Large files may take a minute or two"
-          }
+          label="Rotating…"
+          hint="Re-encoding video with new orientation"
         />
       ) : null}
 
@@ -176,15 +134,15 @@ export default function VideoCompressor() {
           <ResultCard
             inputSize={inputSize}
             outputSize={outputSize}
-            outputLabel="Compressed"
-            successMessage="Compression complete!"
+            outputLabel="Rotated"
+            successMessage="Rotation complete!"
           />
           <DownloadButton
             url={outputUrl}
-            filename={getDownloadFilename(videoFile?.name, "compressed", format)}
-            label={`Download ${format.toUpperCase()}`}
+            filename={getDownloadFilename(videoFile?.name, "rotated", "mp4")}
+            label="Download MP4"
           />
-          <ResetButton onClick={handleReset}>Compress another video</ResetButton>
+          <ResetButton onClick={handleReset}>Rotate another video</ResetButton>
         </div>
       ) : null}
 
