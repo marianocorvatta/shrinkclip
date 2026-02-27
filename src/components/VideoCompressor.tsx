@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useCallback, useTransition } from "react";
+import Image from "next/image";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import type { FFmpeg } from "@ffmpeg/ffmpeg";
 
@@ -312,6 +313,14 @@ export default function VideoCompressor() {
     <div className="w-full max-w-2xl mx-auto">
       {/* Header */}
       <div className="text-center mb-8">
+        <Image
+          src="/logo-w.png"
+          alt="ShrinkClip logo"
+          width={96}
+          height={96}
+          className="mx-auto mb-4"
+          priority
+        />
         <h1 className="text-5xl font-bold mb-3 bg-gradient-to-r from-violet-400 to-purple-500 bg-clip-text text-transparent tracking-tight">
           ShrinkClip
         </h1>
