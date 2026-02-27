@@ -64,7 +64,7 @@ export default function Home() {
               priority
             />
           </Link>
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-violet-400 to-purple-500 bg-clip-text text-transparent tracking-tight">
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-[#2ec4b6] to-[#1b2838] bg-clip-text text-transparent tracking-tight">
             {t("hero.title")}
           </h1>
           <p className="text-zinc-300 text-xl mb-2 font-medium">

@@ -42,8 +42,8 @@ export default function OptionSelector({
             className={[
               "py-2.5 px-3 rounded-lg text-sm font-medium transition-all duration-150",
               selected === opt.value
-                ? "bg-violet-600 text-white shadow-lg shadow-violet-500/20"
-                : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-100",
+                ? "bg-accent-dim text-white shadow-lg shadow-accent/20"
+                : "bg-navy text-zinc-400 hover:bg-navy-light hover:text-zinc-100",
             ].join(" ")}
           >
             {opt.label}

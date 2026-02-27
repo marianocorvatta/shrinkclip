@@ -24,7 +24,7 @@ export default function ToolPageShell({
           <p className="text-zinc-400">{description}</p>
         </div>
         <PrivacyBadge />
-        <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 shadow-2xl">
+        <div className="bg-navy/40 rounded-2xl p-6 border border-navy-light shadow-2xl">
           {children}
         </div>
         <Footer />

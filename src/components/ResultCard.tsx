@@ -30,7 +30,7 @@ export default function ResultCard({
         </p>
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <div className="bg-zinc-800 rounded-xl p-4 text-center">
+        <div className="bg-navy rounded-xl p-4 text-center">
           <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold mb-2">
             {t("original")}
           </p>
@@ -38,11 +38,11 @@ export default function ResultCard({
             {formatBytes(inputSize)}
           </p>
         </div>
-        <div className="bg-zinc-800 rounded-xl p-4 text-center border border-violet-500/30">
+        <div className="bg-navy rounded-xl p-4 text-center border border-accent/30">
           <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold mb-2">
             {outputLabel}
           </p>
-          <p className="text-violet-400 text-2xl font-bold">
+          <p className="text-accent text-2xl font-bold">
             {formatBytes(outputSize)}
           </p>
           {savings > 0 ? (

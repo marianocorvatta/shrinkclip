@@ -70,7 +70,7 @@ export default function VideoMuter() {
 
       {videoFile !== null && status !== "processing" && status !== "done" ? (
         <div className="mt-6 space-y-5">
-          <div className="bg-zinc-800 rounded-xl p-4">
+          <div className="bg-navy rounded-xl p-4">
             <p className="text-zinc-400 text-sm">{t("info")}</p>
           </div>
           <ActionButton

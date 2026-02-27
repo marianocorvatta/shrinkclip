@@ -16,9 +16,9 @@ export default function DownloadButton({
       className={[
         "flex items-center justify-center gap-2",
         "w-full py-3.5 px-6 rounded-xl font-semibold text-white text-base",
-        "bg-gradient-to-r from-violet-600 to-purple-600",
-        "hover:from-violet-500 hover:to-purple-500",
-        "transition-all duration-200 shadow-lg shadow-violet-500/20",
+        "bg-gradient-to-r from-accent-dim to-navy",
+        "hover:from-accent hover:to-navy-light",
+        "transition-all duration-200 shadow-lg shadow-accent/20",
         "active:scale-[0.98]",
       ].join(" ")}
     >

@@ -136,7 +136,7 @@ export default function VideoResizer() {
                   setCustomError(null);
                 }}
                 placeholder={t("customPlaceholder")}
-                className="w-full bg-zinc-800 text-zinc-100 border border-zinc-700 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-violet-500 transition-colors"
+                className="w-full bg-navy text-zinc-100 border border-navy-light rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent transition-colors"
               />
               {customError ? (
                 <p className="text-red-400 text-xs mt-1">{customError}</p>

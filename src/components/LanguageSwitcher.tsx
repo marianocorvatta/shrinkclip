@@ -27,8 +27,8 @@ export default function LanguageSwitcher() {
           className={[
             "px-2 py-1 rounded-md font-medium transition-colors duration-150",
             loc === locale
-              ? "bg-violet-600 text-white"
-              : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800",
+              ? "bg-accent-dim text-white"
+              : "text-zinc-400 hover:text-zinc-100 hover:bg-navy",
           ].join(" ")}
           aria-label={`Switch to ${loc}`}
           aria-current={loc === locale ? "true" : undefined}

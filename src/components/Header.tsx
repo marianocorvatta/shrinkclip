@@ -17,7 +17,7 @@ export default function Header() {
           className="mx-auto mb-3 group-hover:scale-105 transition-transform duration-200"
           priority
         />
-        <span className="block text-4xl font-bold bg-gradient-to-r from-violet-400 to-purple-500 bg-clip-text text-transparent tracking-tight">
+        <span className="block text-4xl font-bold bg-gradient-to-r from-[#2ec4b6] to-[#1b2838] bg-clip-text text-transparent tracking-tight">
           ShrinkClip
         </span>
       </Link>

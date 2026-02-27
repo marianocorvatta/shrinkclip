@@ -8,6 +8,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: #2ec4b6;
+  --color-accent-hover: #3dd4c6;
+  --color-accent-dim: #1b8a80;
+  --color-navy: #1b2838;
+  --color-navy-light: #243447;
+  --color-navy-lighter: #2d4058;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

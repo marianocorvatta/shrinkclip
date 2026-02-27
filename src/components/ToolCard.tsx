@@ -17,12 +17,12 @@ export default function ToolCard({
     <Link
       href={href}
       className={[
-        "block p-5 bg-zinc-900 rounded-xl border border-zinc-800",
-        "hover:border-violet-500/50 hover:bg-zinc-800/80",
+        "block p-5 bg-navy/60 rounded-xl border border-navy-light",
+        "hover:border-accent/50 hover:bg-navy",
         "transition-all duration-200 group",
       ].join(" ")}
     >
-      <h2 className="text-zinc-100 font-semibold text-base mb-1 group-hover:text-violet-400 transition-colors">
+      <h2 className="text-zinc-100 font-semibold text-base mb-1 group-hover:text-accent transition-colors">
         {name}
       </h2>
       <p className="text-zinc-500 text-sm">{description}</p>

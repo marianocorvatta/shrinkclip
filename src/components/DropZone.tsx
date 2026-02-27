@@ -34,8 +34,8 @@ export default function DropZone({
         "relative border-2 border-dashed rounded-xl p-10 text-center cursor-pointer",
         "transition-all duration-200",
         isDragOver
-          ? "border-violet-500 bg-violet-500/10 scale-[1.01]"
-          : "border-zinc-700 hover:border-violet-500/50 hover:bg-zinc-800/50",
+          ? "border-accent bg-accent/10 scale-[1.01]"
+          : "border-navy-light hover:border-accent/50 hover:bg-navy/30",
       ].join(" ")}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
@@ -61,13 +61,13 @@ export default function DropZone({
         <div
           className={[
             "w-16 h-16 rounded-full flex items-center justify-center transition-colors duration-200",
-            isDragOver ? "bg-violet-500/20" : "bg-zinc-800",
+            isDragOver ? "bg-accent/20" : "bg-navy",
           ].join(" ")}
         >
           <svg
             className={[
               "w-8 h-8 transition-colors duration-200",
-              isDragOver ? "text-violet-400" : "text-zinc-500",
+              isDragOver ? "text-accent" : "text-zinc-500",
             ].join(" ")}
             fill="none"
             stroke="currentColor"
