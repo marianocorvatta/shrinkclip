@@ -37,7 +37,6 @@ export async function generateMetadata({
 
 export default function RotatePage() {
   const t = useTranslations("toolPages.rotate");
-  const tc = useTranslations("rotator");
 
   const jsonLd = buildJsonLd({
     name: t("jsonLdName"),
@@ -52,25 +51,7 @@ export default function RotatePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ToolPageShell title={t("title")} description={t("description")}>
-        <VideoRotator
-          translations={{
-            rotationLabel: tc("rotationLabel"),
-            "90cw": tc("90cw"),
-            "90ccw": tc("90ccw"),
-            "180": tc("180"),
-            hint90cw: tc("hint90cw"),
-            hint90ccw: tc("hint90ccw"),
-            hint180: tc("hint180"),
-            actionButton: tc("actionButton"),
-            loadingText: tc("loadingText"),
-            progressLabel: tc("progressLabel"),
-            progressHint: tc("progressHint"),
-            outputLabel: tc("outputLabel"),
-            successMessage: tc("successMessage"),
-            downloadLabel: tc("downloadLabel"),
-            resetButton: tc("resetButton"),
-          }}
-        />
+        <VideoRotator />
       </ToolPageShell>
     </>
   );

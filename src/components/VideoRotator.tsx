@@ -16,26 +16,6 @@ import { getDownloadFilename } from "@/lib/utils";
 
 type Rotation = "90cw" | "90ccw" | "180";
 
-interface VideoRotatorProps {
-  translations: {
-    rotationLabel: string;
-    "90cw": string;
-    "90ccw": string;
-    "180": string;
-    hint90cw: string;
-    hint90ccw: string;
-    hint180: string;
-    actionButton: string;
-    loadingText: string;
-    progressLabel: string;
-    progressHint: string;
-    outputLabel: string;
-    successMessage: string;
-    downloadLabel: string;
-    resetButton: string;
-  };
-}
-
 const filterMap: Record<Rotation, string> = {
   "90cw": "transpose=1",
   "90ccw": "transpose=2",
@@ -59,22 +39,23 @@ function buildRotateArgs(
   ];
 }
 
-export default function VideoRotator({ translations: t }: VideoRotatorProps) {
+export default function VideoRotator() {
+  const t = useTranslations("rotator");
   const te = useTranslations("error");
   const [rotation, setRotation] = useState<Rotation>("90cw");
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [outputSize, setOutputSize] = useState(0);
 
   const rotationOptions = [
-    { value: "90cw", label: t["90cw"] },
-    { value: "90ccw", label: t["90ccw"] },
-    { value: "180", label: t["180"] },
+    { value: "90cw", label: t("90cw") },
+    { value: "90ccw", label: t("90ccw") },
+    { value: "180", label: t("180") },
   ];
 
   const rotationHints: Record<Rotation, string> = {
-    "90cw": t.hint90cw,
-    "90ccw": t.hint90ccw,
-    "180": t.hint180,
+    "90cw": t("hint90cw"),
+    "90ccw": t("hint90ccw"),
+    "180": t("hint180"),
   };
 
   const {
@@ -125,7 +106,7 @@ export default function VideoRotator({ translations: t }: VideoRotatorProps) {
       {videoFile !== null && status !== "processing" && status !== "done" ? (
         <div className="mt-6 space-y-5">
           <OptionSelector
-            label={t.rotationLabel}
+            label={t("rotationLabel")}
             options={rotationOptions}
             selected={rotation}
             onChange={(v) => setRotation(v as Rotation)}
@@ -136,9 +117,9 @@ export default function VideoRotator({ translations: t }: VideoRotatorProps) {
             onClick={handleRun}
             disabled={isDisabled}
             loading={status === "loading-ffmpeg"}
-            loadingText={t.loadingText}
+            loadingText={t("loadingText")}
           >
-            {t.actionButton}
+            {t("actionButton")}
           </ActionButton>
         </div>
       ) : null}
@@ -146,8 +127,8 @@ export default function VideoRotator({ translations: t }: VideoRotatorProps) {
       {status === "processing" ? (
         <ProgressBar
           progress={progress}
-          label={t.progressLabel}
-          hint={t.progressHint}
+          label={t("progressLabel")}
+          hint={t("progressHint")}
         />
       ) : null}
 
@@ -156,15 +137,15 @@ export default function VideoRotator({ translations: t }: VideoRotatorProps) {
           <ResultCard
             inputSize={inputSize}
             outputSize={outputSize}
-            outputLabel={t.outputLabel}
-            successMessage={t.successMessage}
+            outputLabel={t("outputLabel")}
+            successMessage={t("successMessage")}
           />
           <DownloadButton
             url={outputUrl}
             filename={getDownloadFilename(videoFile?.name, "rotated", "mp4")}
-            label={t.downloadLabel}
+            label={t("downloadLabel")}
           />
-          <ResetButton onClick={handleReset}>{t.resetButton}</ResetButton>
+          <ResetButton onClick={handleReset}>{t("resetButton")}</ResetButton>
         </div>
       ) : null}
 

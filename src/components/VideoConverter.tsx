@@ -16,21 +16,6 @@ import { getDownloadFilename } from "@/lib/utils";
 
 type ConvertFormat = "mp4" | "webm";
 
-interface VideoConverterProps {
-  translations: {
-    formatLabel: string;
-    webmHint: string;
-    actionButton: string;
-    loadingText: string;
-    progressLabel: string;
-    progressHintWebm: string;
-    outputLabel: string;
-    successMessage: string;
-    downloadLabel: string;
-    resetButton: string;
-  };
-}
-
 function buildConvertArgs(
   outputFormat: ConvertFormat,
   inputName: string,
@@ -63,7 +48,8 @@ const formatOptions = [
   { value: "webm", label: "WebM" },
 ];
 
-export default function VideoConverter({ translations: t }: VideoConverterProps) {
+export default function VideoConverter() {
+  const t = useTranslations("converter");
   const te = useTranslations("error");
   const [outputFormat, setOutputFormat] = useState<ConvertFormat>("mp4");
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
@@ -117,20 +103,20 @@ export default function VideoConverter({ translations: t }: VideoConverterProps)
       {videoFile !== null && status !== "processing" && status !== "done" ? (
         <div className="mt-6 space-y-5">
           <OptionSelector
-            label={t.formatLabel}
+            label={t("formatLabel")}
             options={formatOptions}
             selected={outputFormat}
             onChange={(v) => setOutputFormat(v as ConvertFormat)}
-            hint={outputFormat === "webm" ? t.webmHint : null}
+            hint={outputFormat === "webm" ? t("webmHint") : null}
             columns={2}
           />
           <ActionButton
             onClick={handleRun}
             disabled={isDisabled}
             loading={status === "loading-ffmpeg"}
-            loadingText={t.loadingText}
+            loadingText={t("loadingText")}
           >
-            {t.actionButton}
+            {t("actionButton")}
           </ActionButton>
         </div>
       ) : null}
@@ -138,8 +124,8 @@ export default function VideoConverter({ translations: t }: VideoConverterProps)
       {status === "processing" ? (
         <ProgressBar
           progress={progress}
-          label={t.progressLabel}
-          hint={outputFormat === "webm" ? t.progressHintWebm : undefined}
+          label={t("progressLabel")}
+          hint={outputFormat === "webm" ? t("progressHintWebm") : undefined}
         />
       ) : null}
 
@@ -148,15 +134,15 @@ export default function VideoConverter({ translations: t }: VideoConverterProps)
           <ResultCard
             inputSize={inputSize}
             outputSize={outputSize}
-            outputLabel={t.outputLabel}
-            successMessage={t.successMessage}
+            outputLabel={t("outputLabel")}
+            successMessage={t("successMessage")}
           />
           <DownloadButton
             url={outputUrl}
             filename={getDownloadFilename(videoFile?.name, "converted", outputFormat)}
-            label={t.downloadLabel.replace("{format}", outputFormat.toUpperCase())}
+            label={t("downloadLabel", { format: outputFormat.toUpperCase() })}
           />
-          <ResetButton onClick={handleReset}>{t.resetButton}</ResetButton>
+          <ResetButton onClick={handleReset}>{t("resetButton")}</ResetButton>
         </div>
       ) : null}
 

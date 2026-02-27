@@ -37,7 +37,6 @@ export async function generateMetadata({
 
 export default function ConvertPage() {
   const t = useTranslations("toolPages.convert");
-  const tc = useTranslations("converter");
 
   const jsonLd = buildJsonLd({
     name: t("jsonLdName"),
@@ -52,20 +51,7 @@ export default function ConvertPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ToolPageShell title={t("title")} description={t("description")}>
-        <VideoConverter
-          translations={{
-            formatLabel: tc("formatLabel"),
-            webmHint: tc("webmHint"),
-            actionButton: tc("actionButton"),
-            loadingText: tc("loadingText"),
-            progressLabel: tc("progressLabel"),
-            progressHintWebm: tc("progressHintWebm"),
-            outputLabel: tc("outputLabel"),
-            successMessage: tc("successMessage"),
-            downloadLabel: tc("downloadLabel"),
-            resetButton: tc("resetButton"),
-          }}
-        />
+        <VideoConverter />
       </ToolPageShell>
     </>
   );

@@ -61,8 +61,9 @@ export function useFFmpeg(): UseFFmpegResult {
         ffmpeg = await getFFmpeg();
       } catch (err) {
         if (abortRef.current) return null;
+        console.error("[useFFmpeg] load error:", err);
         const message =
-          err instanceof Error ? err.message : "Failed to load FFmpeg";
+          err instanceof Error ? err.message : String(err);
         setErrorMessage(`Could not load FFmpeg: ${message}`);
         setStatus("error");
         return null;

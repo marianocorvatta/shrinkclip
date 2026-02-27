@@ -37,7 +37,6 @@ export async function generateMetadata({
 
 export default function MutePage() {
   const t = useTranslations("toolPages.mute");
-  const tc = useTranslations("muter");
 
   const jsonLd = buildJsonLd({
     name: t("jsonLdName"),
@@ -52,19 +51,7 @@ export default function MutePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ToolPageShell title={t("title")} description={t("description")}>
-        <VideoMuter
-          translations={{
-            info: tc("info"),
-            actionButton: tc("actionButton"),
-            loadingText: tc("loadingText"),
-            progressLabel: tc("progressLabel"),
-            progressHint: tc("progressHint"),
-            outputLabel: tc("outputLabel"),
-            successMessage: tc("successMessage"),
-            downloadLabel: tc("downloadLabel"),
-            resetButton: tc("resetButton"),
-          }}
-        />
+        <VideoMuter />
       </ToolPageShell>
     </>
   );

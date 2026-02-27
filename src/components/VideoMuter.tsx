@@ -13,25 +13,12 @@ import { useFFmpeg } from "@/hooks/useFFmpeg";
 import { useVideoFile } from "@/hooks/useVideoFile";
 import { getDownloadFilename, getExtension } from "@/lib/utils";
 
-interface VideoMuterProps {
-  translations: {
-    info: string;
-    actionButton: string;
-    loadingText: string;
-    progressLabel: string;
-    progressHint: string;
-    outputLabel: string;
-    successMessage: string;
-    downloadLabel: string;
-    resetButton: string;
-  };
-}
-
 function buildMuteArgs(inputName: string, outputName: string): string[] {
   return ["-i", inputName, "-an", "-c:v", "copy", outputName];
 }
 
-export default function VideoMuter({ translations: t }: VideoMuterProps) {
+export default function VideoMuter() {
+  const t = useTranslations("muter");
   const te = useTranslations("error");
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [outputSize, setOutputSize] = useState(0);
@@ -84,15 +71,15 @@ export default function VideoMuter({ translations: t }: VideoMuterProps) {
       {videoFile !== null && status !== "processing" && status !== "done" ? (
         <div className="mt-6 space-y-5">
           <div className="bg-zinc-800 rounded-xl p-4">
-            <p className="text-zinc-400 text-sm">{t.info}</p>
+            <p className="text-zinc-400 text-sm">{t("info")}</p>
           </div>
           <ActionButton
             onClick={handleRun}
             disabled={isDisabled}
             loading={status === "loading-ffmpeg"}
-            loadingText={t.loadingText}
+            loadingText={t("loadingText")}
           >
-            {t.actionButton}
+            {t("actionButton")}
           </ActionButton>
         </div>
       ) : null}
@@ -100,8 +87,8 @@ export default function VideoMuter({ translations: t }: VideoMuterProps) {
       {status === "processing" ? (
         <ProgressBar
           progress={progress}
-          label={t.progressLabel}
-          hint={t.progressHint}
+          label={t("progressLabel")}
+          hint={t("progressHint")}
         />
       ) : null}
 
@@ -110,15 +97,15 @@ export default function VideoMuter({ translations: t }: VideoMuterProps) {
           <ResultCard
             inputSize={inputSize}
             outputSize={outputSize}
-            outputLabel={t.outputLabel}
-            successMessage={t.successMessage}
+            outputLabel={t("outputLabel")}
+            successMessage={t("successMessage")}
           />
           <DownloadButton
             url={outputUrl}
             filename={getDownloadFilename(videoFile?.name, "muted", ext)}
-            label={t.downloadLabel.replace("{format}", ext.toUpperCase())}
+            label={t("downloadLabel", { format: ext.toUpperCase() })}
           />
-          <ResetButton onClick={handleReset}>{t.resetButton}</ResetButton>
+          <ResetButton onClick={handleReset}>{t("resetButton")}</ResetButton>
         </div>
       ) : null}
 

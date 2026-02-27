@@ -37,7 +37,6 @@ export async function generateMetadata({
 
 export default function CompressPage() {
   const t = useTranslations("toolPages.compress");
-  const tc = useTranslations("compressor");
 
   const jsonLd = buildJsonLd({
     name: t("jsonLdName"),
@@ -52,28 +51,7 @@ export default function CompressPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ToolPageShell title={t("title")} description={t("description")}>
-        <VideoCompressor
-          translations={{
-            qualityLabel: tc("qualityLabel"),
-            qualityLow: tc("qualityLow"),
-            qualityMedium: tc("qualityMedium"),
-            qualityHigh: tc("qualityHigh"),
-            qualityHintLow: tc("qualityHintLow"),
-            qualityHintMedium: tc("qualityHintMedium"),
-            qualityHintHigh: tc("qualityHintHigh"),
-            formatLabel: tc("formatLabel"),
-            webmHint: tc("webmHint"),
-            actionButton: tc("actionButton"),
-            loadingText: tc("loadingText"),
-            progressLabel: tc("progressLabel"),
-            progressHintWebm: tc("progressHintWebm"),
-            progressHintDefault: tc("progressHintDefault"),
-            outputLabel: tc("outputLabel"),
-            successMessage: tc("successMessage"),
-            downloadLabel: tc("downloadLabel"),
-            resetButton: tc("resetButton"),
-          }}
-        />
+        <VideoCompressor />
       </ToolPageShell>
     </>
   );

@@ -1,7 +1,7 @@
-import type { FFmpeg } from "@ffmpeg/ffmpeg";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL } from "@ffmpeg/util";
 
-const BASE_URL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm";
+const CDN_BASE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm";
 
 let instance: FFmpeg | null = null;
 let loadPromise: Promise<FFmpeg> | null = null;
@@ -15,17 +15,19 @@ export async function getFFmpeg(): Promise<FFmpeg> {
   if (loadPromise) return loadPromise;
 
   loadPromise = (async () => {
-    const { FFmpeg } = await import("@ffmpeg/ffmpeg");
     const ffmpeg = new FFmpeg();
 
     ffmpeg.on("log", ({ message }) => {
       console.log("[ffmpeg]", message);
     });
 
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${BASE_URL}/ffmpeg-core.js`, "text/javascript"),
-      wasmURL: await toBlobURL(`${BASE_URL}/ffmpeg-core.wasm`, "application/wasm"),
-    });
+    const [classWorkerURL, coreURL, wasmURL] = await Promise.all([
+      toBlobURL("/ffmpeg-worker.js", "text/javascript"),
+      toBlobURL(`${CDN_BASE}/ffmpeg-core.js`, "text/javascript"),
+      toBlobURL(`${CDN_BASE}/ffmpeg-core.wasm`, "application/wasm"),
+    ]);
+
+    await ffmpeg.load({ classWorkerURL, coreURL, wasmURL });
 
     instance = ffmpeg;
     return ffmpeg;
@@ -34,7 +36,7 @@ export async function getFFmpeg(): Promise<FFmpeg> {
   try {
     return await loadPromise;
   } catch (err) {
-    loadPromise = null; // allow retry on failure
+    loadPromise = null;
     throw err;
   }
 }

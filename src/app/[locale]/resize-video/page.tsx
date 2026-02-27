@@ -37,7 +37,6 @@ export async function generateMetadata({
 
 export default function ResizePage() {
   const t = useTranslations("toolPages.resize");
-  const tc = useTranslations("resizer");
 
   const jsonLd = buildJsonLd({
     name: t("jsonLdName"),
@@ -52,24 +51,7 @@ export default function ResizePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ToolPageShell title={t("title")} description={t("description")}>
-        <VideoResizer
-          translations={{
-            resolutionLabel: tc("resolutionLabel"),
-            custom: tc("custom"),
-            customWidthLabel: tc("customWidthLabel"),
-            customPlaceholder: tc("customPlaceholder"),
-            customError: tc("customError"),
-            customHint: tc("customHint"),
-            actionButton: tc("actionButton"),
-            loadingText: tc("loadingText"),
-            progressLabel: tc("progressLabel"),
-            progressHint: tc("progressHint"),
-            outputLabel: tc("outputLabel"),
-            successMessage: tc("successMessage"),
-            downloadLabel: tc("downloadLabel"),
-            resetButton: tc("resetButton"),
-          }}
-        />
+        <VideoResizer />
       </ToolPageShell>
     </>
   );

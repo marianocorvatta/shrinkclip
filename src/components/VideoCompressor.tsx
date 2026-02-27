@@ -17,29 +17,6 @@ import { getDownloadFilename } from "@/lib/utils";
 type Quality = "low" | "medium" | "high";
 type Format = "mp4" | "webm";
 
-interface VideoCompressorProps {
-  translations: {
-    qualityLabel: string;
-    qualityLow: string;
-    qualityMedium: string;
-    qualityHigh: string;
-    qualityHintLow: string;
-    qualityHintMedium: string;
-    qualityHintHigh: string;
-    formatLabel: string;
-    webmHint: string;
-    actionButton: string;
-    loadingText: string;
-    progressLabel: string;
-    progressHintWebm: string;
-    progressHintDefault: string;
-    outputLabel: string;
-    successMessage: string;
-    downloadLabel: string;
-    resetButton: string;
-  };
-}
-
 function buildCompressArgs(
   quality: Quality,
   format: Format,
@@ -82,7 +59,8 @@ function buildCompressArgs(
   ];
 }
 
-export default function VideoCompressor({ translations: t }: VideoCompressorProps) {
+export default function VideoCompressor() {
+  const t = useTranslations("compressor");
   const te = useTranslations("error");
   const [quality, setQuality] = useState<Quality>("medium");
   const [format, setFormat] = useState<Format>("mp4");
@@ -97,9 +75,9 @@ export default function VideoCompressor({ translations: t }: VideoCompressorProp
   const { status, progress, errorMessage, loadAndExecute, reset: resetFFmpeg } = useFFmpeg();
 
   const qualityOptions = [
-    { value: "low", label: t.qualityLow },
-    { value: "medium", label: t.qualityMedium },
-    { value: "high", label: t.qualityHigh },
+    { value: "low", label: t("qualityLow") },
+    { value: "medium", label: t("qualityMedium") },
+    { value: "high", label: t("qualityHigh") },
   ];
 
   const formatOptions = [
@@ -108,9 +86,9 @@ export default function VideoCompressor({ translations: t }: VideoCompressorProp
   ];
 
   const qualityHints: Record<Quality, string> = {
-    low: t.qualityHintLow,
-    medium: t.qualityHintMedium,
-    high: t.qualityHintHigh,
+    low: t("qualityHintLow"),
+    medium: t("qualityHintMedium"),
+    high: t("qualityHintHigh"),
   };
 
   const handleRun = async () => {
@@ -154,7 +132,7 @@ export default function VideoCompressor({ translations: t }: VideoCompressorProp
       {videoFile !== null && status !== "processing" && status !== "done" ? (
         <div className="mt-6 space-y-5">
           <OptionSelector
-            label={t.qualityLabel}
+            label={t("qualityLabel")}
             options={qualityOptions}
             selected={quality}
             onChange={(v) => setQuality(v as Quality)}
@@ -162,20 +140,20 @@ export default function VideoCompressor({ translations: t }: VideoCompressorProp
             columns={3}
           />
           <OptionSelector
-            label={t.formatLabel}
+            label={t("formatLabel")}
             options={formatOptions}
             selected={format}
             onChange={(v) => setFormat(v as Format)}
-            hint={format === "webm" ? t.webmHint : null}
+            hint={format === "webm" ? t("webmHint") : null}
             columns={2}
           />
           <ActionButton
             onClick={handleRun}
             disabled={isDisabled}
             loading={status === "loading-ffmpeg"}
-            loadingText={t.loadingText}
+            loadingText={t("loadingText")}
           >
-            {t.actionButton}
+            {t("actionButton")}
           </ActionButton>
         </div>
       ) : null}
@@ -183,8 +161,8 @@ export default function VideoCompressor({ translations: t }: VideoCompressorProp
       {status === "processing" ? (
         <ProgressBar
           progress={progress}
-          label={t.progressLabel}
-          hint={format === "webm" ? t.progressHintWebm : t.progressHintDefault}
+          label={t("progressLabel")}
+          hint={format === "webm" ? t("progressHintWebm") : t("progressHintDefault")}
         />
       ) : null}
 
@@ -193,15 +171,15 @@ export default function VideoCompressor({ translations: t }: VideoCompressorProp
           <ResultCard
             inputSize={inputSize}
             outputSize={outputSize}
-            outputLabel={t.outputLabel}
-            successMessage={t.successMessage}
+            outputLabel={t("outputLabel")}
+            successMessage={t("successMessage")}
           />
           <DownloadButton
             url={outputUrl}
             filename={getDownloadFilename(videoFile?.name, "compressed", format)}
-            label={t.downloadLabel.replace("{format}", format.toUpperCase())}
+            label={t("downloadLabel", { format: format.toUpperCase() })}
           />
-          <ResetButton onClick={handleReset}>{t.resetButton}</ResetButton>
+          <ResetButton onClick={handleReset}>{t("resetButton")}</ResetButton>
         </div>
       ) : null}
 
