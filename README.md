@@ -173,7 +173,7 @@ Found a bug or have a feature request? [Open an issue](https://github.com/mcorva
 - **TypeScript** — Strict mode enabled, no `any` types
 - **Styling** — Tailwind CSS only, no external UI libraries
 - **Components** — Functional components with hooks
-- **Formatting** — Prettier enforced, run `npm run lint` before committing
+- **Formatting** — Prettier enforced, run `pnpm lint` before committing
 
 ---
 
