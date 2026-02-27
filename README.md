@@ -55,7 +55,7 @@ Try it live at **[shrinkclip.com](https://shrinkclip.com)**
 ### Prerequisites
 
 - Node.js 18+ 
-- npm or yarn
+- pnpm
 
 ### Installation
 
@@ -67,13 +67,13 @@ git clone https://github.com/mcorvatta/shrinkclip.git
 cd shrinkclip
 
 # Install dependencies
-npm install
+pnpm install
 ```
 
 ### Development
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -81,8 +81,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Production Build
 
 ```bash
-npm run build
-npm start
+pnpm build
+pnpm start
 ```
 
 ---
