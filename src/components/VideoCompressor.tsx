@@ -251,7 +251,9 @@ export default function VideoCompressor() {
       await ffmpeg.exec(args);
 
       const data = await ffmpeg.readFile(outputName);
-      const blob = new Blob([data as Uint8Array], { type: outputMime });
+      // Double-cast via unknown to bypass the SharedArrayBufferLike constraint
+      const bytes = new Uint8Array((data as unknown as ArrayBufferLike) as ArrayBuffer);
+      const blob = new Blob([bytes], { type: outputMime });
       const url = URL.createObjectURL(blob);
 
       await ffmpeg.deleteFile(inputName);

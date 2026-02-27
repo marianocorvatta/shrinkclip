@@ -1,9 +1,4 @@
-import dynamic from "next/dynamic";
-
-const VideoCompressor = dynamic(
-  () => import("@/components/VideoCompressor"),
-  { ssr: false }
-);
+import VideoCompressor from "@/components/VideoCompressor";
 
 export default function Home() {
   return (
